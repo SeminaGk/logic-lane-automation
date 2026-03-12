@@ -52,14 +52,6 @@ export default function App() {
         ease: 'power3.out'
       });
 
-      // Latch pill bright once it enters viewport — no reverse
-      ScrollTrigger.create({
-        trigger: '#manifesto-agency',
-        start: 'top 60%',
-        onEnter: () => {
-          document.querySelector('#manifesto-agency').classList.add('pill-lit');
-        }
-      });
 
       // 4. Stacking Protocol Archive
       const cards = gsap.utils.toArray('.protocol-card');
@@ -246,8 +238,8 @@ export default function App() {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundSize: '100px 100px', backgroundImage: 'linear-gradient(rgba(255, 255, 255, 1) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 1) 2px, transparent 2px)' }}></div>
         </div>
         <div className="relative z-10 max-w-5xl px-6 md:px-8 flex flex-col gap-8 md:gap-12">
-          <p id="manifesto-agency" className="manifesto-text font-heading text-base md:text-xl font-medium tracking-wide border border-white/20 w-fit mx-auto px-5 md:px-8 py-3 md:py-4 rounded-full shadow-sm bg-white/5 backdrop-blur-md cursor-default transition-all duration-500 text-white/60">
-            Most agencies focus on: <br/><span className="text-foreground font-bold">rigid templates and manual copying.</span>
+          <p id="manifesto-agency" className="manifesto-text font-heading text-base md:text-xl font-medium tracking-wide border border-black/10 w-fit mx-auto px-5 md:px-8 py-3 md:py-4 rounded-full bg-white cursor-default shadow-md" style={{color: 'rgb(15 23 42)'}}>
+            Most agencies focus on: <br/><span className="font-bold" style={{color: 'rgb(15 23 42)'}}>rigid templates and manual copying.</span>
           </p>
           <p className="manifesto-text font-heading font-black text-3xl md:text-5xl text-foreground leading-tight mt-4 md:mt-8 tracking-tight">
             <span className="text-accent">We focus on:</span> <br/>
