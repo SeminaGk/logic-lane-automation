@@ -136,7 +136,7 @@ export default function App() {
           <h1 className="hero-reveal font-heading font-black tracking-tight text-3xl sm:text-5xl md:text-7xl lg:text-[6.5rem] leading-[1.1] text-foreground">
             AUTOMATE WORKFLOWS.
           </h1>
-          <h2 className="hero-reveal font-drama italic text-4xl sm:text-6xl md:text-[7rem] lg:text-[8.5rem] leading-[0.9] text-foreground mt-2 tracking-tighter flex flex-wrap items-end pb-6">
+          <h2 className="hero-reveal font-drama italic text-3xl sm:text-6xl md:text-[7rem] lg:text-[8.5rem] leading-[0.9] text-foreground mt-2 tracking-tighter flex flex-wrap items-end pb-6">
             scale <span className="text-accent inline-block ml-2 md:ml-4 font-mono font-bold not-italic tracking-tight typing-efficiency whitespace-nowrap border-r-4 border-accent uppercase">efficiency.</span>
           </h2>
           <div className="hero-reveal mt-8 md:mt-12 flex items-center gap-4 md:gap-6">
@@ -153,7 +153,7 @@ export default function App() {
 
       {/* FEATURES SECTION */}
       <section id="features" className="py-16 md:py-32 px-6 md:px-8 w-full max-w-7xl mx-auto bg-background relative z-20">
-        <div className="font-mono text-foreground/50 font-bold text-xs mb-16 tracking-widest uppercase border-l-2 border-accent pl-4">System Capabilities //</div>
+        <div className="font-mono text-foreground/50 font-bold text-xs mb-8 md:mb-16 tracking-widest uppercase border-l-2 border-accent pl-4">System Capabilities //</div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
@@ -243,7 +243,7 @@ export default function App() {
           </p>
           <p className="manifesto-text font-heading font-black text-3xl md:text-5xl text-foreground leading-tight mt-4 md:mt-8 tracking-tight">
             <span className="text-accent">We focus on:</span> <br/>
-            <span className="font-mono font-black tracking-normal text-3xl md:text-[5rem] lg:text-[7rem] mt-4 md:mt-8 flex flex-col items-center uppercase scale-y-[1.05] leading-[1.1]">
+            <span className="font-mono font-black tracking-normal text-[2rem] sm:text-[3rem] md:text-[5rem] lg:text-[7rem] mt-4 md:mt-8 flex flex-col items-center uppercase scale-y-[1.05] leading-[1.1]">
               <span className="text-foreground hover:text-accent transition-colors duration-500 cursor-default mb-2">PURE</span>
               <span className="text-accent underline decoration-2 md:decoration-4 underline-offset-4 md:underline-offset-8 decoration-accent/30 pointer-events-none">AUTOMATION.</span>
             </span>
@@ -252,12 +252,12 @@ export default function App() {
       </section>
 
       {/* PROTOCOL - STICKY STACKING ARCHIVE */}
-      <section id="protocol" className="relative w-full py-32 bg-background flex flex-col">
-        <div className="max-w-7xl mx-auto px-8 w-full mb-16">
+      <section id="protocol" className="relative w-full py-16 md:py-32 bg-background flex flex-col">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 w-full mb-8 md:mb-16">
            <div className="font-mono text-foreground/50 font-bold text-xs tracking-widest uppercase border-l-2 border-accent pl-4">Deployment Protocol //</div>
         </div>
 
-        <div className="protocol-wrapper relative h-[300vh] w-full max-w-7xl mx-auto px-8">
+        <div className="protocol-wrapper relative h-[300vh] w-full max-w-7xl mx-auto px-4 md:px-8">
           
           {/* Card 1: Audit */}
           <div className="protocol-card sticky top-20 md:top-32 w-full h-[65vh] md:h-[70vh] rounded-[2rem] md:rounded-[3rem] bg-surface border border-slate/50 p-6 md:p-12 flex flex-col justify-between shadow-xl overflow-hidden mb-24 z-10">
@@ -340,7 +340,7 @@ export default function App() {
            </div>
 
            {/* Case Study 2 Placeholder */}
-           <div className="group cursor-pointer md:mt-16">
+           <div className="group cursor-pointer mt-0 md:mt-16">
               <div className="w-full aspect-video bg-surface border border-slate/50 rounded-[2rem] overflow-hidden mb-6 shadow-md transition-transform group-hover:-translate-y-2 relative flex items-center justify-center">
                  {/* Decorative Placeholder UI */}
                  <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundSize: '40px 40px', backgroundImage: 'linear-gradient(rgba(248,250,252,1) 1px, transparent 1px), linear-gradient(90deg, rgba(248,250,252,1) 1px, transparent 1px)' }}></div>
@@ -378,8 +378,8 @@ export default function App() {
       <footer className="w-full bg-surface text-foreground px-6 md:px-8 py-12 md:py-20 mt-10 rounded-t-[2rem] md:rounded-t-[3rem] border-t border-slate/50">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
-            <h3 className="font-heading font-black uppercase tracking-normal text-3xl mb-4 flex items-center gap-2">
-              Logic Lane Automation. <div className="w-3 h-3 bg-accent animate-pulse shadow-glow mt-1 rounded-full"></div>
+            <h3 className="font-heading font-black uppercase tracking-normal text-xl md:text-3xl mb-4 flex items-center gap-2">
+              Logic Lane Automation. <div className="w-3 h-3 bg-accent animate-pulse shadow-glow mt-1 rounded-full flex-shrink-0"></div>
             </h3>
             <p className="font-mono text-sm text-foreground/75 max-w-sm mb-8 leading-relaxed">
               Architecting the next generation of automated internet real estate. High-fidelity web dev meets pure AI logic.
