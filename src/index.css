@@ -79,6 +79,14 @@
   }
 }
 
+@keyframes cursor-blink {
+  0%, 100% { border-right-color: rgb(var(--color-accent)); }
+  50%       { border-right-color: transparent; }
+}
+.typing-efficiency {
+  animation: cursor-blink 1s step-end infinite;
+}
+
 .pill-lit {
   background-color: rgb(var(--color-background) / 0.92);
   border-color: rgb(var(--color-foreground) / 0.35);

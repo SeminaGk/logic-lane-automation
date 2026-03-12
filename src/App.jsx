@@ -100,8 +100,8 @@ export default function App() {
 
       {/* NAVBAR */}
       <nav id="island-nav" className="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] max-w-5xl rounded-full px-4 md:px-8 py-3 md:py-4 flex items-center justify-between z-50 transition-all duration-500 bg-transparent border border-transparent [&.scrolled-nav]:bg-surface/80 [&.scrolled-nav]:backdrop-blur-xl [&.scrolled-nav]:border-slate/50 [&.scrolled-nav]:shadow-glow">
-        <div className="font-heading font-bold text-sm md:text-xl tracking-normal text-foreground flex items-center gap-1.5 md:gap-2">
-            Logic Lane<span className="hidden sm:inline">Automation</span>. <span className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(139,92,246,0.8)]"></span>
+        <div className="font-heading font-bold text-[0.7rem] sm:text-sm md:text-xl tracking-normal text-foreground flex items-center gap-1.5 md:gap-2 whitespace-nowrap">
+            Logic Lane Automation. <span className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(139,92,246,0.8)]"></span>
         </div>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs tracking-widest uppercase font-bold text-foreground/80">
           <a href="#features" className="hover:text-accent transition-colors hover:-translate-y-px transform block">Capabilities</a>
@@ -144,8 +144,8 @@ export default function App() {
           <h1 className="hero-reveal font-heading font-black tracking-tight text-3xl sm:text-5xl md:text-7xl lg:text-[6.5rem] leading-[1.1] text-foreground">
             AUTOMATE WORKFLOWS.
           </h1>
-          <h2 className="hero-reveal font-drama italic text-4xl sm:text-6xl md:text-[7rem] lg:text-[8.5rem] leading-[0.9] text-foreground mt-2 tracking-tighter flex flex-wrap items-end overflow-hidden pb-4">
-            scale <span className="text-accent inline-block ml-2 md:ml-4 font-mono font-bold not-italic tracking-tight typing-efficiency whitespace-nowrap overflow-hidden border-r-4 border-accent uppercase">efficiency.</span>
+          <h2 className="hero-reveal font-drama italic text-4xl sm:text-6xl md:text-[7rem] lg:text-[8.5rem] leading-[0.9] text-foreground mt-2 tracking-tighter flex flex-wrap items-end pb-6">
+            scale <span className="text-accent inline-block ml-2 md:ml-4 font-mono font-bold not-italic tracking-tight typing-efficiency whitespace-nowrap border-r-4 border-accent uppercase">efficiency.</span>
           </h2>
           <div className="hero-reveal mt-8 md:mt-12 flex items-center gap-4 md:gap-6">
             <button className="btn-sliding overflow-hidden rounded-full font-heading font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 bg-accent text-foreground flex items-center gap-3 transition-transform hover:scale-[1.03] active:scale-95 shadow-glow">
