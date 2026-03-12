@@ -1,12 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Terminal, Network, Cpu } from 'lucide-react';
+import { ArrowRight, Terminal, Network, Cpu, Sun, Moon } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const containerRef = useRef(null);
+  const [isLightMode, setIsLightMode] = useState(true);
+
+  useEffect(() => {
+    if (isLightMode) {
+      document.documentElement.classList.add('light-mode');
+    } else {
+      document.documentElement.classList.remove('light-mode');
+    }
+  }, [isLightMode]);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -41,6 +50,15 @@ export default function App() {
         duration: 1,
         stagger: 0.2,
         ease: 'power3.out'
+      });
+
+      // Latch pill bright once it enters viewport — no reverse
+      ScrollTrigger.create({
+        trigger: '#manifesto-agency',
+        start: 'top 60%',
+        onEnter: () => {
+          document.querySelector('#manifesto-agency').classList.add('pill-lit');
+        }
       });
 
       // 4. Stacking Protocol Archive
@@ -81,9 +99,9 @@ export default function App() {
       <div className="noise-overlay"></div>
 
       {/* NAVBAR */}
-      <nav id="island-nav" className="fixed top-8 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl rounded-full px-8 py-4 flex items-center justify-between z-50 transition-all duration-500 bg-transparent border border-transparent [&.scrolled-nav]:bg-surface/80 [&.scrolled-nav]:backdrop-blur-xl [&.scrolled-nav]:border-slate/50 [&.scrolled-nav]:shadow-glow">
-        <div className="font-heading font-bold text-xl tracking-normal text-foreground flex items-center gap-2">
-            Logic Lane Automation. <span className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(139,92,246,0.8)]"></span>
+      <nav id="island-nav" className="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] max-w-5xl rounded-full px-4 md:px-8 py-3 md:py-4 flex items-center justify-between z-50 transition-all duration-500 bg-transparent border border-transparent [&.scrolled-nav]:bg-surface/80 [&.scrolled-nav]:backdrop-blur-xl [&.scrolled-nav]:border-slate/50 [&.scrolled-nav]:shadow-glow">
+        <div className="font-heading font-bold text-sm md:text-xl tracking-normal text-foreground flex items-center gap-1.5 md:gap-2">
+            Logic Lane<span className="hidden sm:inline">Automation</span>. <span className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(139,92,246,0.8)]"></span>
         </div>
         <div className="hidden md:flex items-center gap-8 font-mono text-xs tracking-widest uppercase font-bold text-foreground/80">
           <a href="#features" className="hover:text-accent transition-colors hover:-translate-y-px transform block">Capabilities</a>
@@ -91,14 +109,24 @@ export default function App() {
           <a href="#portfolio" className="hover:text-accent transition-colors hover:-translate-y-px transform block">Portfolio</a>
           <a href="#pricing" className="hover:text-accent transition-colors hover:-translate-y-px transform block">Connect</a>
         </div>
-        <button className="btn-sliding overflow-hidden rounded-full font-heading font-semibold text-sm px-6 py-2.5 bg-foreground text-background flex items-center gap-2 transition-transform hover:scale-[1.03] active:scale-95 shadow-sm">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsLightMode(prev => !prev)}
+            className="flex items-center gap-1.5 rounded-full px-3 py-1.5 border border-slate/50 text-foreground/60 hover:text-accent hover:border-accent/50 transition-all text-xs font-mono"
+            aria-label="Toggle theme"
+          >
+            {isLightMode ? <Moon size={14} /> : <Sun size={14} />}
+            <span className="hidden md:inline">{isLightMode ? 'Dark' : 'Light'}</span>
+          </button>
+        <button className="btn-sliding overflow-hidden rounded-full font-heading font-semibold text-xs md:text-sm px-4 md:px-6 py-2 md:py-2.5 bg-foreground text-background flex items-center gap-2 transition-transform hover:scale-[1.03] active:scale-95 shadow-sm">
           <span className="slide-bg bg-accent"></span>
           <span className="content flex items-center gap-2">Book a call <ArrowRight size={16} /></span>
         </button>
+        </div>
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative h-[100dvh] w-full flex items-end pb-24 px-8 md:px-16 overflow-hidden bg-background">
+      <section className="relative h-[100dvh] w-full flex items-end pb-16 md:pb-24 px-6 md:px-16 overflow-hidden bg-background">
         {/* Abstract Glowing Background */}
         <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
           <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-accent/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
@@ -113,14 +141,14 @@ export default function App() {
           <div className="hero-reveal font-mono text-accent text-sm md:text-md uppercase tracking-[0.2em] font-bold mb-4 bg-accent/10 w-fit px-4 py-2 rounded-full border border-accent/30 flex items-center gap-3">
              <span className="w-2 h-2 bg-accent rounded-full animate-ping"></span> Signal: Online
           </div>
-          <h1 className="hero-reveal font-heading font-black tracking-tight text-5xl md:text-7xl lg:text-[6.5rem] leading-[1.1] text-foreground">
+          <h1 className="hero-reveal font-heading font-black tracking-tight text-3xl sm:text-5xl md:text-7xl lg:text-[6.5rem] leading-[1.1] text-foreground">
             AUTOMATE WORKFLOWS.
           </h1>
-          <h2 className="hero-reveal font-drama italic text-6xl md:text-[7rem] lg:text-[8.5rem] leading-[0.9] text-foreground mt-2 tracking-tighter flex items-end overflow-hidden pb-4">
-            scale <span className="text-accent inline-block ml-4 font-mono font-bold not-italic tracking-tight typing-efficiency whitespace-nowrap overflow-hidden border-r-4 border-accent uppercase">efficiency.</span>
+          <h2 className="hero-reveal font-drama italic text-4xl sm:text-6xl md:text-[7rem] lg:text-[8.5rem] leading-[0.9] text-foreground mt-2 tracking-tighter flex flex-wrap items-end overflow-hidden pb-4">
+            scale <span className="text-accent inline-block ml-2 md:ml-4 font-mono font-bold not-italic tracking-tight typing-efficiency whitespace-nowrap overflow-hidden border-r-4 border-accent uppercase">efficiency.</span>
           </h2>
-          <div className="hero-reveal mt-12 flex items-center gap-6">
-            <button className="btn-sliding overflow-hidden rounded-full font-heading font-bold text-lg px-8 py-4 bg-accent text-foreground flex items-center gap-3 transition-transform hover:scale-[1.03] active:scale-95 shadow-glow">
+          <div className="hero-reveal mt-8 md:mt-12 flex items-center gap-4 md:gap-6">
+            <button className="btn-sliding overflow-hidden rounded-full font-heading font-bold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 bg-accent text-foreground flex items-center gap-3 transition-transform hover:scale-[1.03] active:scale-95 shadow-glow">
               <span className="slide-bg bg-foreground"></span>
               <span className="content flex items-center gap-3 text-background">Initialize System <ArrowRight size={20} /></span>
             </button>
@@ -132,7 +160,7 @@ export default function App() {
       </section>
 
       {/* FEATURES SECTION */}
-      <section id="features" className="py-32 px-8 w-full max-w-7xl mx-auto bg-background relative z-20">
+      <section id="features" className="py-16 md:py-32 px-6 md:px-8 w-full max-w-7xl mx-auto bg-background relative z-20">
         <div className="font-mono text-foreground/50 font-bold text-xs mb-16 tracking-widest uppercase border-l-2 border-accent pl-4">System Capabilities //</div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -213,19 +241,19 @@ export default function App() {
       </section>
 
       {/* PHILOSOPHY (The Manifesto) */}
-      <section id="manifesto" className="relative w-full py-48 flex items-center justify-center text-center overflow-hidden border-y border-slate/50 bg-[#060608]">
+      <section id="manifesto" className="relative w-full py-24 md:py-48 flex items-center justify-center text-center overflow-hidden border-y border-slate/50 bg-[#060608]">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundSize: '100px 100px', backgroundImage: 'linear-gradient(rgba(255, 255, 255, 1) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 1) 2px, transparent 2px)' }}></div>
         </div>
-        <div className="relative z-10 max-w-5xl px-8 flex flex-col gap-12">
-          <p className="manifesto-text font-heading text-lg md:text-xl font-medium text-foreground/70 tracking-wide border border-foreground/10 w-fit mx-auto px-8 py-4 rounded-full shadow-sm bg-background/50 backdrop-blur-md">
+        <div className="relative z-10 max-w-5xl px-6 md:px-8 flex flex-col gap-8 md:gap-12">
+          <p id="manifesto-agency" className="manifesto-text font-heading text-base md:text-xl font-medium text-foreground/70 tracking-wide border border-foreground/10 w-fit mx-auto px-5 md:px-8 py-3 md:py-4 rounded-full shadow-sm bg-background/50 backdrop-blur-md cursor-default transition-all duration-500">
             Most agencies focus on: <br/><span className="text-foreground font-bold">rigid templates and manual copying.</span>
           </p>
-          <p className="manifesto-text font-heading font-black text-4xl md:text-5xl text-foreground leading-tight mt-8 tracking-tight">
-            We focus on: <br/>
-            <span className="font-mono font-black tracking-normal text-4xl md:text-[5rem] lg:text-[7rem] mt-8 flex flex-col items-center uppercase scale-y-[1.05] leading-[1.1]">
+          <p className="manifesto-text font-heading font-black text-3xl md:text-5xl text-foreground leading-tight mt-4 md:mt-8 tracking-tight">
+            <span className="text-accent">We focus on:</span> <br/>
+            <span className="font-mono font-black tracking-normal text-3xl md:text-[5rem] lg:text-[7rem] mt-4 md:mt-8 flex flex-col items-center uppercase scale-y-[1.05] leading-[1.1]">
               <span className="text-foreground hover:text-accent transition-colors duration-500 cursor-default mb-2">PURE</span>
-              <span className="text-accent underline decoration-4 underline-offset-8 decoration-accent/30 pointer-events-none">AUTOMATION.</span>
+              <span className="text-accent underline decoration-2 md:decoration-4 underline-offset-4 md:underline-offset-8 decoration-accent/30 pointer-events-none">AUTOMATION.</span>
             </span>
           </p>
         </div>
@@ -240,11 +268,11 @@ export default function App() {
         <div className="protocol-wrapper relative h-[300vh] w-full max-w-7xl mx-auto px-8">
           
           {/* Card 1: Audit */}
-          <div className="protocol-card sticky top-32 w-full h-[60vh] md:h-[70vh] rounded-[3rem] bg-surface border border-slate/50 p-12 flex flex-col justify-between shadow-xl overflow-hidden mb-24 z-10">
+          <div className="protocol-card sticky top-20 md:top-32 w-full h-[65vh] md:h-[70vh] rounded-[2rem] md:rounded-[3rem] bg-surface border border-slate/50 p-6 md:p-12 flex flex-col justify-between shadow-xl overflow-hidden mb-24 z-10">
             <div className="relative z-10">
-              <div className="font-mono text-6xl font-black text-foreground/10 mb-6 drop-shadow-sm">01</div>
-              <h2 className="font-heading font-bold tracking-tight uppercase text-5xl mb-4 text-foreground max-w-lg leading-none">Architecture Audit</h2>
-              <p className="font-mono text-sm text-foreground/60 max-w-md leading-relaxed">
+              <div className="font-mono text-4xl md:text-6xl font-black text-foreground/10 mb-4 md:mb-6 drop-shadow-sm">01</div>
+              <h2 className="font-heading font-bold tracking-tight uppercase text-3xl md:text-5xl mb-3 md:mb-4 text-foreground max-w-lg leading-none">Architecture Audit</h2>
+              <p className="font-mono text-xs md:text-sm text-foreground/60 max-w-md leading-relaxed">
                 We dissect your digital infrastructure to locate raw bottlenecks. Finding prime targets where algorithmic automation replaces manual labor entirely.
               </p>
             </div>
@@ -257,11 +285,11 @@ export default function App() {
           </div>
 
           {/* Card 2: Architect */}
-          <div className="protocol-card sticky top-32 w-full h-[60vh] md:h-[70vh] rounded-[3rem] bg-surface border border-slate/50 p-12 flex flex-col justify-between shadow-xl overflow-hidden mb-24 z-20">
+          <div className="protocol-card sticky top-20 md:top-32 w-full h-[65vh] md:h-[70vh] rounded-[2rem] md:rounded-[3rem] bg-surface border border-slate/50 p-6 md:p-12 flex flex-col justify-between shadow-xl overflow-hidden mb-24 z-20">
             <div className="relative z-10">
-              <div className="font-mono text-6xl font-black text-foreground/10 mb-6 drop-shadow-sm">02</div>
-              <h2 className="font-heading font-bold tracking-tight uppercase text-5xl mb-4 text-foreground max-w-lg leading-none">Precision Engineering</h2>
-              <p className="font-mono text-sm text-foreground/60 max-w-md leading-relaxed">
+              <div className="font-mono text-4xl md:text-6xl font-black text-foreground/10 mb-4 md:mb-6 drop-shadow-sm">02</div>
+              <h2 className="font-heading font-bold tracking-tight uppercase text-3xl md:text-5xl mb-3 md:mb-4 text-foreground max-w-lg leading-none">Precision Engineering</h2>
+              <p className="font-mono text-xs md:text-sm text-foreground/60 max-w-md leading-relaxed">
                 We construct flawless React web applications embedded with intelligent agents. A unified ecosystem that scales without human input.
               </p>
             </div>
@@ -272,18 +300,18 @@ export default function App() {
           </div>
 
           {/* Card 3: Deploy */}
-          <div className="protocol-card sticky top-32 w-full h-[60vh] md:h-[70vh] rounded-[3rem] bg-surface border border-slate/50 p-12 flex flex-col justify-between shadow-xl overflow-hidden z-30">
+          <div className="protocol-card sticky top-20 md:top-32 w-full h-[65vh] md:h-[70vh] rounded-[2rem] md:rounded-[3rem] bg-surface border border-slate/50 p-6 md:p-12 flex flex-col justify-between shadow-xl overflow-hidden z-30">
             <div className="relative z-10">
-              <div className="font-mono text-6xl font-black text-accent/20 mb-6 drop-shadow-sm">03</div>
-              <h2 className="font-heading font-bold tracking-tight uppercase text-5xl mb-4 text-accent max-w-lg leading-none">Autonomous Deployment</h2>
-              <p className="font-mono text-sm text-foreground/60 max-w-md leading-relaxed">
+              <div className="font-mono text-4xl md:text-6xl font-black text-accent/20 mb-4 md:mb-6 drop-shadow-sm">03</div>
+              <h2 className="font-heading font-bold tracking-tight uppercase text-3xl md:text-5xl mb-3 md:mb-4 text-accent max-w-lg leading-none">Autonomous Deployment</h2>
+              <p className="font-mono text-xs md:text-sm text-foreground/60 max-w-md leading-relaxed">
                 The instrument goes live. Webhooks fire. Databases sync. Logic Lane takes over your operations, executing silently and flawlessly.
               </p>
             </div>
             {/* Pulsing Core */}
-            <div className="absolute right-20 top-1/2 -translate-y-1/2 w-80 h-80 border border-foreground/10 rounded-full flex items-center justify-center pointer-events-none">
-                <div className="w-56 h-56 border border-foreground/20 rounded-full flex items-center justify-center">
-                    <div className="w-32 h-32 bg-accent rounded-full shadow-glow pulse-dot"></div>
+            <div className="absolute right-4 md:right-20 top-1/2 -translate-y-1/2 w-40 md:w-80 h-40 md:h-80 border border-foreground/10 rounded-full flex items-center justify-center pointer-events-none">
+                <div className="w-28 md:w-56 h-28 md:h-56 border border-foreground/20 rounded-full flex items-center justify-center">
+                    <div className="w-16 md:w-32 h-16 md:h-32 bg-accent rounded-full shadow-glow pulse-dot"></div>
                 </div>
             </div>
           </div>
@@ -292,9 +320,9 @@ export default function App() {
       </section>
 
       {/* PORTFOLIO / CASE STUDIES */}
-      <section id="portfolio" className="py-32 px-8 w-full max-w-7xl mx-auto bg-background">
-        <div className="font-mono text-foreground/50 font-bold text-xs mb-16 tracking-widest uppercase border-l-2 border-accent pl-4">Digital Architecture //</div>
-        <h2 className="font-heading font-black uppercase text-5xl md:text-6xl text-foreground mb-16 tracking-normal leading-none">
+      <section id="portfolio" className="py-16 md:py-32 px-6 md:px-8 w-full max-w-7xl mx-auto bg-background">
+        <div className="font-mono text-foreground/50 font-bold text-xs mb-8 md:mb-16 tracking-widest uppercase border-l-2 border-accent pl-4">Digital Architecture //</div>
+        <h2 className="font-heading font-black uppercase text-4xl md:text-6xl text-foreground mb-8 md:mb-16 tracking-normal leading-none">
           Selected <span className="text-accent">Works.</span>
         </h2>
         
@@ -304,7 +332,7 @@ export default function App() {
               <div className="w-full aspect-video bg-surface border border-slate/50 rounded-[2rem] overflow-hidden mb-6 shadow-md transition-transform group-hover:-translate-y-2 relative flex items-center justify-center">
                  {/* Decorative Placeholder UI */}
                  <div className="absolute inset-0 opacity-10" style={{ backgroundSize: '20px 20px', backgroundImage: 'radial-gradient(circle, #F8FAFC 1px, transparent 1px)' }}></div>
-                 <div className="font-mono text-foreground/30 font-bold text-xl uppercase tracking-widest border border-foreground/20 px-6 py-3 rounded-full group-hover:bg-accent group-hover:text-background group-hover:border-accent transition-all duration-300">
+                 <div className="font-mono text-foreground/30 font-bold text-sm md:text-xl uppercase tracking-widest border border-foreground/20 px-4 md:px-6 py-2 md:py-3 rounded-full group-hover:bg-accent group-hover:text-background group-hover:border-accent transition-all duration-300">
                     Awaiting Case Study 01
                  </div>
               </div>
@@ -324,7 +352,7 @@ export default function App() {
               <div className="w-full aspect-video bg-surface border border-slate/50 rounded-[2rem] overflow-hidden mb-6 shadow-md transition-transform group-hover:-translate-y-2 relative flex items-center justify-center">
                  {/* Decorative Placeholder UI */}
                  <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundSize: '40px 40px', backgroundImage: 'linear-gradient(rgba(248,250,252,1) 1px, transparent 1px), linear-gradient(90deg, rgba(248,250,252,1) 1px, transparent 1px)' }}></div>
-                 <div className="font-mono text-foreground/30 font-bold text-xl uppercase tracking-widest border border-foreground/20 px-6 py-3 rounded-full group-hover:bg-accent group-hover:text-background group-hover:border-accent transition-all duration-300">
+                 <div className="font-mono text-foreground/30 font-bold text-sm md:text-xl uppercase tracking-widest border border-foreground/20 px-4 md:px-6 py-2 md:py-3 rounded-full group-hover:bg-accent group-hover:text-background group-hover:border-accent transition-all duration-300">
                     Awaiting Case Study 02
                  </div>
               </div>
@@ -342,26 +370,26 @@ export default function App() {
       </section>
 
       {/* MEMBERSHIP / PRICING & FOOTER */}
-      <section id="pricing" className="py-40 px-8 w-full max-w-screen-2xl mx-auto flex flex-col items-center border-t border-slate/50">
+      <section id="pricing" className="py-20 md:py-40 px-6 md:px-8 w-full max-w-screen-2xl mx-auto flex flex-col items-center border-t border-slate/50">
          <div className="font-mono text-foreground/50 font-bold text-xs mb-8 tracking-widest uppercase bg-foreground/5 px-4 py-2 rounded-full border border-foreground/10">System Finalization //</div>
-         <h2 className="font-heading font-black uppercase text-5xl md:text-7xl lg:text-[6rem] text-center mb-16 text-foreground tracking-normal leading-[0.9]">
+         <h2 className="font-heading font-black uppercase text-4xl md:text-7xl lg:text-[6rem] text-center mb-10 md:mb-16 text-foreground tracking-normal leading-[0.9]">
             Ready to <br/><span className="text-accent">scale logic?</span>
          </h2>
          
-         <div className="btn-sliding overflow-hidden rounded-full font-heading font-black uppercase tracking-wider text-xl px-16 py-8 bg-foreground text-background flex items-center gap-4 transition-transform hover:scale-[1.03] active:scale-95 shadow-glow cursor-pointer group">
+         <div className="btn-sliding overflow-hidden rounded-full font-heading font-black uppercase tracking-wider text-base md:text-xl px-8 md:px-16 py-5 md:py-8 bg-foreground text-background flex items-center gap-3 md:gap-4 transition-transform hover:scale-[1.03] active:scale-95 shadow-glow cursor-pointer group">
             <span className="slide-bg bg-accent"></span>
-            <span className="content flex items-center gap-4 text-background">Book a Strategy Call <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" /></span>
+            <span className="content flex items-center gap-3 md:gap-4 text-background">Book a Strategy Call <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" /></span>
          </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="w-full bg-[#030304] text-foreground px-8 py-20 mt-10 rounded-t-[3rem] border-t border-slate/50">
+      <footer className="w-full bg-surface text-foreground px-6 md:px-8 py-12 md:py-20 mt-10 rounded-t-[2rem] md:rounded-t-[3rem] border-t border-slate/50">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
             <h3 className="font-heading font-black uppercase tracking-normal text-3xl mb-4 flex items-center gap-2">
-               Logic Lane Automation. <div className="w-3 h-3 bg-accent animate-pulse shadow-glow mt-1 rounded-full"></div>
+              Logic Lane Automation. <div className="w-3 h-3 bg-accent animate-pulse shadow-glow mt-1 rounded-full"></div>
             </h3>
-            <p className="font-mono text-sm text-foreground/50 max-w-sm mb-8 leading-relaxed">
+            <p className="font-mono text-sm text-foreground/75 max-w-sm mb-8 leading-relaxed">
               Architecting the next generation of automated internet real estate. High-fidelity web dev meets pure AI logic.
             </p>
             <div className="flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-accent bg-accent/10 w-fit px-4 py-2 rounded border border-accent/20">
@@ -370,14 +398,14 @@ export default function App() {
             </div>
           </div>
           <div className="flex flex-col gap-4">
-             <h4 className="font-mono text-xs font-bold text-foreground/30 uppercase tracking-widest mb-2 border-b border-foreground/10 pb-2">Navigation</h4>
-             <a href="#features" className="font-heading font-bold text-sm text-foreground/70 hover:text-accent transition-colors">Capabilities</a>
-             <a href="#protocol" className="font-heading font-bold text-sm text-foreground/70 hover:text-accent transition-colors">Protocol</a>
+             <h4 className="font-mono text-xs font-bold text-foreground/50 uppercase tracking-widest mb-2 border-b border-foreground/20 pb-2">Navigation</h4>
+             <a href="#features" className="font-heading font-bold text-sm text-foreground/80 hover:text-accent transition-colors">Capabilities</a>
+             <a href="#protocol" className="font-heading font-bold text-sm text-foreground/80 hover:text-accent transition-colors">Protocol</a>
           </div>
           <div className="flex flex-col gap-4">
-             <h4 className="font-mono text-xs font-bold text-foreground/30 uppercase tracking-widest mb-2 border-b border-foreground/10 pb-2">Legal</h4>
-             <a href="#" className="font-heading font-bold text-sm text-foreground/70 hover:text-accent transition-colors">Privacy Policy</a>
-             <a href="#" className="font-heading font-bold text-sm text-foreground/70 hover:text-accent transition-colors">Terms of Service</a>
+             <h4 className="font-mono text-xs font-bold text-foreground/50 uppercase tracking-widest mb-2 border-b border-foreground/20 pb-2">Legal</h4>
+             <a href="#" className="font-heading font-bold text-sm text-foreground/80 hover:text-accent transition-colors">Privacy Policy</a>
+             <a href="#" className="font-heading font-bold text-sm text-foreground/80 hover:text-accent transition-colors">Terms of Service</a>
           </div>
         </div>
       </footer>

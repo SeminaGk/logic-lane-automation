@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#040405', // Pitch black with slight tint
-        surface: '#111114',    // Very dark grey
-        accent: '#8B5CF6',     // Electric Purple
-        foreground: '#F8FAFC', // White text
-        slate: '#27272A'       // Subtle border color
+        background: 'rgb(var(--color-background) / <alpha-value>)',
+        surface:    'rgb(var(--color-surface)    / <alpha-value>)',
+        accent:     'rgb(var(--color-accent)     / <alpha-value>)',
+        foreground: 'rgb(var(--color-foreground) / <alpha-value>)',
+        slate:      'rgb(var(--color-slate)      / <alpha-value>)',
       },
       fontFamily: {
         heading: ['"Outfit"', 'sans-serif'],

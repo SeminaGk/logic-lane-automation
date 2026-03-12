@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark mode (default) */
+:root {
+  --color-background: 4 4 5;
+  --color-surface: 17 17 20;
+  --color-accent: 139 92 246;
+  --color-foreground: 248 250 252;
+  --color-slate: 39 39 42;
+}
+
+/* Light mode */
+.light-mode {
+  --color-background: 248 250 255;
+  --color-surface: 238 242 255;
+  --color-accent: 79 70 229;
+  --color-foreground: 15 23 42;
+  --color-slate: 203 213 225;
+}
+
+/* Smooth transition for ALL elements when theme switches */
+*, *::before, *::after {
+  transition: background-color 0.4s ease, color 0.4s ease,
+              border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
 @layer base {
   body {
     background-color: theme('colors.background');
@@ -53,4 +77,15 @@
   .btn-sliding:hover > span.content {
     color: theme('colors.background');
   }
+}
+
+.pill-lit {
+  background-color: rgb(var(--color-background) / 0.92);
+  border-color: rgb(var(--color-foreground) / 0.35);
+  color: rgb(var(--color-foreground));
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+.pill-lit:hover {
+  border-color: rgb(var(--color-foreground) / 0.5);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
 }
